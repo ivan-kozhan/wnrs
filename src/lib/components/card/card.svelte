@@ -1,13 +1,17 @@
 ﻿<script lang="ts">
     type Props = {
         front: string;
+        frontTooltip?: string;
         back?: string;
+        backTooltip?: string;
         special?: boolean;
     };
 
     const {
         front,
+        frontTooltip,
         back,
+        backTooltip,
         special = false
     }: Props = $props();
 
@@ -40,22 +44,27 @@
         ontransitionend={onTransitionEnd}
         class="relative w-full h-full transition-transform duration-700 ease-in-out [transform-style:preserve-3d] rounded-4xl shadow-card cursor-pointer"
         class:animate-flip-forward={animating && !flipped}
-        class:animate-flip-back={animating && flipped}
         class:rotate-y-180={flipped && !animating}
         class:rotate-y-0={!flipped && !animating}>
 
         <div
-            class="absolute inset-0 [backface-visibility:hidden] rounded-4xl flex flex-col justify-center items-center"
+            class="absolute inset-0 [backface-visibility:hidden] rounded-4xl flex flex-col justify-center items-center gap-3 p-2"
             class:bg-card-primary={special}
             class:text-card-background={special}
             class:bg-card-background={!special}
             class:text-card-primary={!special}>
             <span class="text-lg font-bold">{front}</span>
+            {#if frontTooltip}
+                <span class="italic">{frontTooltip}</span>
+            {/if}
         </div>
 
         {#if back}
-            <div class="absolute inset-0 [backface-visibility:hidden] rotate-y-180 rounded-4xl flex flex-col justify-center items-center bg-card-primary text-card-background">
+            <div class="absolute inset-0 [backface-visibility:hidden] rotate-y-180 rounded-4xl flex flex-col justify-center items-center gap-3 p-2 bg-card-primary text-card-background">
                 <span class="text-lg font-bold">{back}</span>
+                {#if backTooltip}
+                    <span class="italic">{backTooltip}</span>
+                {/if}
             </div>
         {/if}
     </button>
@@ -72,38 +81,23 @@
     @keyframes liftFlipForward {
         0% {
             transform: rotateY(0deg) scale(1) translateZ(0);
+            z-index: 1;
         }
         30% {
             transform: rotateY(0deg) scale(1.1) translateZ(50px);
+            z-index: 10;
         }
         70% {
             transform: rotateY(180deg) scale(1.1) translateZ(50px);
+            z-index: 10;
         }
         100% {
             transform: rotateY(180deg) scale(1) translateZ(0);
-        }
-    }
-
-    @keyframes liftFlipBack {
-        0% {
-            transform: rotateY(180deg) scale(1) translateZ(0);
-        }
-        30% {
-            transform: rotateY(180deg) scale(1.1) translateZ(50px);
-        }
-        70% {
-            transform: rotateY(0deg) scale(1.1) translateZ(50px);
-        }
-        100% {
-            transform: rotateY(0deg) scale(1) translateZ(0);
+            z-index: 1;
         }
     }
 
     .animate-flip-forward {
         animation: liftFlipForward 0.7s ease-in-out forwards;
-    }
-
-    .animate-flip-back {
-        animation: liftFlipBack 0.7s ease-in-out forwards;
     }
 </style>
