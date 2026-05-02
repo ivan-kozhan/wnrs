@@ -9,16 +9,18 @@
         special?: boolean;
         class?: HTMLAttributes<HTMLDivElement>["class"];
         style?: string;
+        ref?: HTMLElement
     };
 
-    const {
+    let {
         front,
         frontTooltip,
         back,
         backTooltip,
         class: className,
         style,
-        special = false
+        special = false,
+        ref = $bindable()
     }: Props = $props();
 
     let flipped = $state(false);
@@ -44,7 +46,7 @@
     }
 </script>
 
-<div {style} class={["[perspective:1000px] w-80 h-56", className]}>
+<div bind:this={ref} {style} class={["[perspective:1000px] w-80 h-56", className]}>
     <button
         onclick={handleClick}
         onanimationend={onTransitionEnd}

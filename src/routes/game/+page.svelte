@@ -8,10 +8,12 @@
     import { type Card as CardData } from "\$lib/models/card";
     import {toCardProps} from "$lib/util/card-helpers";
     import {takeRandom} from "$lib/util/array";
+    import { tick } from "svelte";
 
     type PlacedCard = {
         data: CardData;
         rotation: number;
+        element?: HTMLElement;
     }
 
     const levelBadges = LevelNames.map(((x, i) => ({ value: i, label: x })));
@@ -22,7 +24,7 @@
     let level = $state(0);
     let placedCards: PlacedCard[] = $state([]);
 
-    function addCard() {
+    async function addCard() {
         const currentDeck = decks[level];
 
         if (!currentDeck.length) {
@@ -36,7 +38,29 @@
 
         counts[level]++;
         placedCards = [...placedCards.slice(-19), newCard];
+
+        await tick();
+
+        const cardElement = placedCards[placedCards.length - 1]?.element;
+        cardElement && flyInFromCamera(cardElement);
     }
+
+    function flyInFromCamera(element: HTMLElement) {
+        const finalTransform = getComputedStyle(element).transform;
+        const startTransform = `translate(calc(50vw - 50%), calc(50vh - 50%)) scale(2) rotate(0deg)`;
+
+        element.animate(
+           [
+               { transform: startTransform, opacity: 0 },
+               { transform: finalTransform, opacity: 1 }
+           ],
+           {
+               duration: 400,
+               easing: 'cubic-bezier(0.2, 0.9, 0.4, 1.1)',
+               fill: 'forwards'
+           }
+        );
+   }
 </script>
 
 <div class="flex flex-col h-full gap-16">
@@ -50,7 +74,7 @@
         {/if}
         <div class="relative">
             {#each placedCards as card, i (card.data.text)}
-                <Card style="transform: rotate({card.rotation}deg) translateY(-{i}px)" class="absolute -translate-1/2" {...toCardProps(card.data)} />
+                <Card bind:ref={card.element} style="transform: rotate({card.rotation}deg) translateY(-{i}px)" class="absolute -translate-1/2" {...toCardProps(card.data)} />
             {/each}
         </div>
     </button>
