@@ -5,6 +5,7 @@
     "npm:@sveltejs/kit@^2.57.0": "2.59.0_@sveltejs+vite-plugin-svelte@7.0.0__svelte@5.55.5__vite@8.0.10_svelte@5.55.5_typescript@6.0.3_vite@8.0.10",
     "npm:@sveltejs/vite-plugin-svelte@7": "7.0.0_svelte@5.55.5_vite@8.0.10",
     "npm:@tailwindcss/vite@^4.2.2": "4.2.4_vite@8.0.10",
+    "npm:lucide-svelte@^1.0.1": "1.0.1_svelte@5.55.5",
     "npm:svelte-check@^4.4.6": "4.4.7_svelte@5.55.5_typescript@6.0.3",
     "npm:svelte@^5.55.2": "5.55.5",
     "npm:tailwindcss@^4.2.2": "4.2.4",
@@ -471,6 +472,12 @@
     "locate-character@3.0.0": {
       "integrity": "sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA=="
     },
+    "lucide-svelte@1.0.1_svelte@5.55.5": {
+      "integrity": "sha512-WvzZgk0pqzgda+AErLvgWxHkfg/+GgUwqKMRHvzt0IqyMdmyEDzDCk3Z+Wo/3y753oIgx8u9Q4eUbWkghFa8Jg==",
+      "dependencies": [
+        "svelte"
+      ]
+    },
     "magic-string@0.30.21": {
       "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
       "dependencies": [
@@ -643,6 +650,7 @@
         "npm:@sveltejs/kit@^2.57.0",
         "npm:@sveltejs/vite-plugin-svelte@7",
         "npm:@tailwindcss/vite@^4.2.2",
+        "npm:lucide-svelte@^1.0.1",
         "npm:svelte-check@^4.4.6",
         "npm:svelte@^5.55.2",
         "npm:tailwindcss@^4.2.2",

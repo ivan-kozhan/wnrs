@@ -1,10 +1,14 @@
 ﻿<script lang="ts">
+    import type {HTMLAttributes} from "svelte/elements";
+
     type Props = {
         front: string;
         frontTooltip?: string;
         back?: string;
         backTooltip?: string;
         special?: boolean;
+        class?: HTMLAttributes<HTMLDivElement>["class"];
+        style?: string;
     };
 
     const {
@@ -12,6 +16,8 @@
         frontTooltip,
         back,
         backTooltip,
+        class: className,
+        style,
         special = false
     }: Props = $props();
 
@@ -38,10 +44,10 @@
     }
 </script>
 
-<div class="[perspective:1000px] w-80 h-56">
+<div {style} class={["[perspective:1000px] w-80 h-56", className]}>
     <button
         onclick={handleClick}
-        ontransitionend={onTransitionEnd}
+        onanimationend={onTransitionEnd}
         class="relative w-full h-full transition-transform duration-700 ease-in-out [transform-style:preserve-3d] rounded-4xl shadow-card cursor-pointer"
         class:animate-flip-forward={animating && !flipped}
         class:rotate-y-180={flipped && !animating}
