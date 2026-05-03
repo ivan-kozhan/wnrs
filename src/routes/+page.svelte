@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { resolve } from '$app/paths';
     import {Play, SlidersHorizontal} from "lucide-svelte";
     import {Button} from "$lib/components/button";
 </script>
@@ -9,7 +10,7 @@
         <div class="h-[2px] mt-1 bg-card-primary w-16"></div>
         <span class="text-sm text-gray-700">спрашивай • слушай • сближайся</span>
     </div>
-    <Button href="/game">
+    <Button href={resolve("/game")}>
         <Play class="h-4" fill="currentColor"/>
         Играть
     </Button>

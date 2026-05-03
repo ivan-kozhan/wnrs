@@ -9,6 +9,7 @@
     import {toCardProps} from "$lib/util/card-helpers";
     import {takeRandom} from "$lib/util/array";
     import { tick } from "svelte";
+    import {resolve} from "$app/paths";
 
     type PlacedCard = {
         data: CardData;
@@ -84,7 +85,7 @@
         {/if}
     </div>
     <div class="flex justify-center">
-        <Button href="/" variant="secondary" size="small" class="w-fit">
+        <Button href={resolve("/")} variant="secondary" size="small" class="w-fit">
             <LogOut class="h-4"/>
             Выйти в главное меню
         </Button>
