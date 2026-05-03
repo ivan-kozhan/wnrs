@@ -3,7 +3,7 @@
     import {LevelNames} from "$lib/decks/level-names";
     import {BaseDeck, HonestDatingDeck, ArthurAronDeck} from "$lib/decks";
     import {Button} from "$lib/components/button";
-    import {LogOut, MousePointerClick} from "lucide-svelte";
+    import {ArrowRight, Layers, Loader, LogOut, MousePointerClick} from "lucide-svelte";
     import Card from "$lib/components/card";
     import { type Card as CardData } from "\$lib/models/card";
     import {toCardProps} from "$lib/util/card-helpers";
@@ -69,7 +69,7 @@
     <button class="flex-1 flex flex-col items-center justify-center" onclick={addCard}>
         {#if placedCards.length === 0}
             <div class="flex flex-col items-center gap-2 text-gray-400">
-                <MousePointerClick class="size-16" strokeWidth="1" />
+                <Loader class="size-24" strokeWidth="1" />
                 <span class="text-lg">Нажмите, чтобы начать</span>
             </div>
         {/if}
@@ -79,14 +79,19 @@
             {/each}
         </div>
     </button>
-    <div class="flex flex-col items-center text-gray-500">
-        {#if placedCards.length > 0}
-            <span>Вопрос {counts[level]} из {counts[level] + decks[level].length}</span>
-        {/if}
-    </div>
-    <div class="flex justify-center">
-        <Button href={resolve("/")} variant="secondary" size="small" class="w-fit">
-            <LogOut class="h-4"/>
+    <div class="flex flex-col justify-center items-center gap-6">
+        <div class="flex gap-2">
+            <Button variant="secondary" size="small" onclick={addCard} class="w-fit">
+                <ArrowRight class="w-4"/>
+                Следующая карта
+            </Button>
+            <div class="flex items-center px-4 gap-1 bg-gray-200 text-xs rounded-full">
+                <Layers class="w-3"/>
+                Осталось {decks[level].length}
+            </div>
+        </div>
+        <Button href={resolve("/")} variant="muted" size="small" class="w-fit">
+            <LogOut class="w-4"/>
             Выйти в главное меню
         </Button>
     </div>

@@ -46,7 +46,7 @@
     }
 </script>
 
-<div bind:this={ref} {style} class={["[perspective:1000px] w-80 h-56", className]}>
+<div bind:this={ref} {style} class={["[perspective:1000px] w-80 h-68", className]}>
     <button
         onclick={handleClick}
         onanimationend={onTransitionEnd}
@@ -56,7 +56,7 @@
         class:rotate-y-0={!flipped && !animating}>
 
         <div
-            class="absolute inset-0 [backface-visibility:hidden] rounded-4xl flex flex-col justify-center items-center gap-3 p-2"
+            class="absolute inset-0 [backface-visibility:hidden] rounded-4xl flex flex-col justify-center items-center gap-3 p-4"
             class:bg-card-primary={special}
             class:text-card-background={special}
             class:bg-card-background={!special}
@@ -68,7 +68,7 @@
         </div>
 
         {#if back}
-            <div class="absolute inset-0 [backface-visibility:hidden] rotate-y-180 rounded-4xl flex flex-col justify-center items-center gap-3 p-2 bg-card-primary text-card-background">
+            <div class="absolute inset-0 [backface-visibility:hidden] rotate-y-180 rounded-4xl flex flex-col justify-center items-center gap-3 p-4 bg-card-primary text-card-background">
                 <span class="text-lg font-bold">{back}</span>
                 {#if backTooltip}
                     <span class="italic">{backTooltip}</span>

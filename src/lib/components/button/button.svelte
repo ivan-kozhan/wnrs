@@ -12,6 +12,7 @@
         href?: string;
         size?: Size;
         class?: HTMLAttributes<HTMLElement>["class"]
+        onclick?: () => void;
     };
 
     let {
@@ -19,13 +20,14 @@
         variant = "primary",
         size = "medium",
         href,
-        class: className
+        class: className,
+        onclick
     }: Props = $props();
 
     const baseClass = "flex items-center justify-center gap-1 rounded-full shadow-sm transition-all hover:scale-[102%] active:scale-[98%]";
 
     const sizes: Record<Size, HTMLAttributes<HTMLElement>["class"]> = {
-        "small": "p-3 w-30 border-1 text-sm",
+        "small": "px-4 py-2 w-30 border-1 text-sm",
         "medium": "p-4 w-40 border-2 font-bold",
     }
 
@@ -41,7 +43,7 @@
         {@render children()}
     </a>
 {:else}
-    <button class={[baseClass, sizes[size], variants[variant], className]}>
+    <button {onclick} class={[baseClass, sizes[size], variants[variant], className]}>
         {@render children()}
     </button>
 {/if}
