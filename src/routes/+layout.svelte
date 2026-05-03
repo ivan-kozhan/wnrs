@@ -7,6 +7,6 @@
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
-<main class="size-full p-4">
+<main class="size-full px-4 py-8">
     {@render children()}
 </main>
