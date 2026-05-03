@@ -38,7 +38,7 @@
         };
 
         counts[level]++;
-        placedCards = [...placedCards.slice(-19), newCard];
+        placedCards = [...placedCards.slice(-10), newCard];
 
         await tick();
 
